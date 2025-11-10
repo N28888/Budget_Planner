@@ -1,6 +1,10 @@
-# 💰 Budget Tracker
-
-[English](README.md) | [中文](README_CN.md)
+<div align="center">
+  <img src="public/icons/icon-192x192.svg" alt="Budget Tracker Logo" width="120" height="120">
+  
+  # Budget Tracker
+  
+  [English](README.md) | [中文](README_CN.md)
+</div>
 
 A full-featured personal budget management application with multi-device sync, dual-currency conversion, and PWA installation support.
 
