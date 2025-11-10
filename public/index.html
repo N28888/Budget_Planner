@@ -21,10 +21,6 @@
                 <span class="nav-icon">💸</span>
                 <span class="nav-text">支出</span>
             </li>
-            <li class="nav-item" data-section="savings">
-                <span class="nav-icon">🎯</span>
-                <span class="nav-text">储蓄</span>
-            </li>
             <li class="nav-item" data-section="wishlist">
                 <span class="nav-icon">🛍️</span>
                 <span class="nav-text">愿望清单</span>
@@ -34,12 +30,24 @@
                 <span class="nav-text">设置</span>
             </li>
         </ul>
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <span class="nav-icon">🚪</span>
+                <span class="nav-text">退出登录</span>
+            </button>
+        </div>
     </nav>
 
     <div class="main-content">
         <header class="top-bar">
             <h1 id="pageTitle">总览</h1>
-            <div class="rate-badge" id="rateInfo">汇率加载中...</div>
+            <div class="top-bar-right">
+                <div class="rate-badge" id="rateInfo">汇率加载中...</div>
+                <div class="user-info">
+                    <span class="user-icon">👤</span>
+                    <span class="user-name" id="userName">用户</span>
+                </div>
+            </div>
         </header>
 
         <!-- 总览页面 -->
@@ -116,35 +124,6 @@
                 </div>
                 <div class="card-body">
                     <div id="expensesList" class="list-container"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 储蓄页面 -->
-        <div class="page" id="savings-page">
-            <div class="card">
-                <div class="card-header">
-                    <h2>添加储蓄目标</h2>
-                </div>
-                <div class="card-body">
-                    <div class="form-grid-5">
-                        <input type="text" id="savingsName" placeholder="储蓄目标名称">
-                        <input type="number" id="savingsTarget" placeholder="目标金额">
-                        <input type="number" id="savingsCurrent" placeholder="当前金额">
-                        <select id="savingsCurrency">
-                            <option value="primary" id="savingsCurrencyPrimary">CNY</option>
-                            <option value="secondary" id="savingsCurrencySecondary">USD</option>
-                        </select>
-                        <button class="btn-primary" id="addSavings">+ 添加目标</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h2>我的储蓄目标</h2>
-                </div>
-                <div class="card-body">
-                    <div id="savingsList" class="list-container"></div>
                 </div>
             </div>
         </div>
@@ -245,6 +224,66 @@
                     </div>
                     <button class="btn-primary" id="saveTaxRate">保存税率</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑支出模态框 -->
+    <div id="editExpenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>编辑支出</h2>
+                <button class="modal-close" onclick="closeEditExpenseModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid-4">
+                    <input type="text" id="editExpenseName" placeholder="支出项目名称">
+                    <input type="number" id="editExpenseAmount" placeholder="金额">
+                    <select id="editExpenseCurrency">
+                        <option value="primary" id="editExpenseCurrencyPrimary">CNY</option>
+                        <option value="secondary" id="editExpenseCurrencySecondary">USD</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditExpenseModal()">取消</button>
+                <button class="btn-primary" id="saveEditExpense">保存修改</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑愿望清单模态框 -->
+    <div id="editWishModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>编辑愿望</h2>
+                <button class="modal-close" onclick="closeEditWishModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="wishlist-form-container">
+                    <div class="form-row">
+                        <input type="text" id="editWishName" placeholder="想买的东西">
+                        <input type="number" id="editWishPrice" placeholder="价格">
+                        <select id="editWishCurrency">
+                            <option value="primary" id="editWishCurrencyPrimary">CNY</option>
+                            <option value="secondary" id="editWishCurrencySecondary">USD</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <select id="editWishTaxOption">
+                            <option value="no">不需要打税</option>
+                            <option value="yes">需要打税</option>
+                        </select>
+                        <select id="editWishTaxType" disabled>
+                            <option value="before">税前价</option>
+                            <option value="after">税后价</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeEditWishModal()">取消</button>
+                <button class="btn-primary" id="saveEditWish">保存修改</button>
             </div>
         </div>
     </div>

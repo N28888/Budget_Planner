@@ -90,6 +90,36 @@ body {
     font-size: 20px;
 }
 
+.sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.logout-btn:hover {
+    background: var(--bg-main);
+    color: var(--danger);
+}
+
 /* 主内容区 */
 .main-content {
     margin-left: 260px;
@@ -110,6 +140,12 @@ body {
     color: var(--text-primary);
 }
 
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .rate-badge {
     background: var(--primary);
     color: white;
@@ -117,6 +153,32 @@ body {
     border-radius: 20px;
     font-size: 14px;
     font-weight: 500;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.2s;
+}
+
+.user-info:hover {
+    background: var(--bg-main);
+    box-shadow: var(--shadow);
+}
+
+.user-icon {
+    font-size: 18px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
 /* 页面切换 */
@@ -364,6 +426,28 @@ input:focus, select:focus {
     color: var(--text-secondary);
 }
 
+.item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn {
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.edit-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
 .delete-btn {
     padding: 8px 16px;
     background: var(--danger);
@@ -378,6 +462,7 @@ input:focus, select:focus {
 
 .delete-btn:hover {
     background: #dc2626;
+    transform: translateY(-1px);
 }
 
 /* 进度条 */
@@ -401,6 +486,128 @@ input:focus, select:focus {
     font-size: 13px;
     color: var(--text-secondary);
     font-weight: 500;
+}
+
+/* 货币标记 */
+.currency-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+/* 模态框 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: var(--bg-card);
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s;
+    padding: 0;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    background: var(--bg-main);
+    color: var(--text-primary);
+}
+
+.modal-body {
+    padding: 24px;
+    max-height: calc(90vh - 180px);
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    gap: 12px;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    justify-content: flex-end;
+}
+
+.btn-secondary {
+    padding: 12px 24px;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--border);
+    transform: translateY(-2px);
 }
 
 /* 空状态 */
@@ -449,6 +656,17 @@ input:focus, select:focus {
         gap: 16px;
     }
     
+    .top-bar-right {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .rate-badge, .user-info {
+        width: 100%;
+        justify-content: center;
+    }
+    
     .stats-grid {
         grid-template-columns: 1fr;
     }
@@ -462,6 +680,27 @@ input:focus, select:focus {
     
     .input-group {
         flex-direction: column;
+    }
+    
+    .item-actions {
+        flex-direction: column;
+    }
+    
+    .edit-btn, .delete-btn {
+        width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 20px;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-footer button {
+        width: 100%;
     }
 }
 
