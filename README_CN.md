@@ -1,6 +1,10 @@
-# 💰 预算追踪器
-
-[English](README.md) | [中文](README_CN.md)
+<div align="center">
+  <img src="public/icons/icon-192x192.svg" alt="预算追踪器 Logo" width="120" height="120">
+  
+  # 预算追踪器
+  
+  [English](README.md) | [中文](README_CN.md)
+</div>
 
 一个功能完整的个人预算管理应用，支持多设备同步、双货币转换、PWA 安装等功能。
 
