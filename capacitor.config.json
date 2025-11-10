@@ -1,0 +1,15 @@
+{
+  "appId": "com.yfanj.budget",
+  "appName": "预算追踪器",
+  "webDir": "public",
+  "server": {
+    "url": "https://budget.yfanj.ca",
+    "cleartext": true
+  },
+  "ios": {
+    "contentInset": "automatic"
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}
