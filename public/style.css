@@ -852,6 +852,31 @@ input:focus, select:focus {
     font-weight: 500;
 }
 
+/* 版权信息 */
+.page-footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.page-footer p {
+    margin: 6px 0;
+}
+
+.page-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.page-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
 @media (max-width: 480px) {
     .sidebar {
         display: none;
@@ -863,6 +888,13 @@ input:focus, select:focus {
     
     .mobile-only {
         display: block;
+    }
+    
+    .page-footer {
+        margin-top: 24px;
+        padding-top: 16px;
+        font-size: 11px;
+        margin-bottom: 20px;
     }
     
     .main-content {

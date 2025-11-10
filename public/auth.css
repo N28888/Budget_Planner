@@ -363,6 +363,31 @@ body::after {
     font-weight: 500;
 }
 
+/* 版权信息 */
+.auth-footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.auth-footer p {
+    margin: 6px 0;
+}
+
+.auth-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-footer a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
 @media (max-width: 480px) {
     .auth-card {
         padding: 32px 24px;
@@ -379,6 +404,12 @@ body::after {
 
     .features-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .auth-footer {
+        margin-top: 24px;
+        padding-top: 16px;
+        font-size: 11px;
     }
 }
 
