@@ -1,13 +1,36 @@
 #!/bin/bash
 
 # 自动部署到服务器脚本
-SERVER="sj.yfanj.ca"
-USER="root"  # 如果不是 root，请修改
-REMOTE_DIR="/var/www/budget-tracker"
 
 echo "======================================"
-echo "部署预算追踪器到 $SERVER"
+echo "部署预算追踪器"
 echo "======================================"
+echo ""
+
+# 询问服务器信息
+read -p "请输入服务器地址 (例如: example.com): " SERVER
+read -p "请输入用户名 (例如: root): " USER
+read -p "请输入远程目录 (默认: /var/www/budget-tracker): " REMOTE_DIR
+
+# 设置默认值
+REMOTE_DIR=${REMOTE_DIR:-/var/www/budget-tracker}
+
+echo ""
+echo "======================================"
+echo "部署配置:"
+echo "  服务器: $SERVER"
+echo "  用户名: $USER"
+echo "  目录: $REMOTE_DIR"
+echo "======================================"
+echo ""
+read -p "确认部署? (y/n): " CONFIRM
+
+if [ "$CONFIRM" != "y" ] && [ "$CONFIRM" != "Y" ]; then
+    echo "❌ 部署已取消"
+    exit 0
+fi
+
+echo ""
 
 # 1. 打包项目
 echo "📦 打包项目..."
@@ -27,8 +50,8 @@ scp budget-tracker.tar.gz $USER@$SERVER:/tmp/
 echo "🚀 在服务器上部署..."
 ssh $USER@$SERVER << 'ENDSSH'
     # 创建目录
-    mkdir -p /var/www/budget-tracker
-    cd /var/www/budget-tracker
+    mkdir -p $REMOTE_DIR
+    cd $REMOTE_DIR
     
     # 解压文件
     tar -xzf /tmp/budget-tracker.tar.gz
@@ -57,7 +80,6 @@ ssh $USER@$SERVER << 'ENDSSH'
     pm2 save
     
     echo "✅ 部署完成！"
-    echo "访问: http://sj.yfanj.ca:3000"
 ENDSSH
 
 # 4. 清理本地临时文件
@@ -66,9 +88,11 @@ rm budget-tracker.tar.gz
 echo "======================================"
 echo "✅ 部署完成！"
 echo "======================================"
-echo "访问地址: http://sj.yfanj.ca:3000"
+echo "访问地址: http://$SERVER:3000"
 echo ""
 echo "常用命令:"
 echo "  查看日志: ssh $USER@$SERVER 'pm2 logs budget-tracker'"
 echo "  重启服务: ssh $USER@$SERVER 'pm2 restart budget-tracker'"
 echo "  查看状态: ssh $USER@$SERVER 'pm2 status'"
+echo ""
+echo "💡 提示: 下次部署时可以直接运行 ./deploy-to-server.sh"
