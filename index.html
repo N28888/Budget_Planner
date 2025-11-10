@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预算追踪器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">💰</span>
+            <span class="logo-text">预算追踪</span>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item active" data-section="overview">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">总览</span>
+            </li>
+            <li class="nav-item" data-section="expenses">
+                <span class="nav-icon">💸</span>
+                <span class="nav-text">支出</span>
+            </li>
+            <li class="nav-item" data-section="savings">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-text">储蓄</span>
+            </li>
+            <li class="nav-item" data-section="wishlist">
+                <span class="nav-icon">🛍️</span>
+                <span class="nav-text">愿望清单</span>
+            </li>
+            <li class="nav-item" data-section="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">设置</span>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="top-bar">
+            <h1 id="pageTitle">总览</h1>
+            <div class="rate-badge" id="rateInfo">汇率加载中...</div>
+        </header>
+
+        <!-- 总览页面 -->
+        <div class="page active" id="overview-page">
+            <div class="stats-grid">
+                <div class="stat-card budget-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <div class="stat-label">本月预算</div>
+                        <div class="stat-value" id="budgetPrimary">¥0</div>
+                        <div class="stat-secondary" id="budgetSecondary">$0</div>
+                    </div>
+                </div>
+                <div class="stat-card spent-card">
+                    <div class="stat-icon">💸</div>
+                    <div class="stat-content">
+                        <div class="stat-label">已花费</div>
+                        <div class="stat-value" id="spentPrimary">¥0</div>
+                        <div class="stat-secondary" id="spentSecondary">$0</div>
+                    </div>
+                </div>
+                <div class="stat-card remaining-card">
+                    <div class="stat-icon">💵</div>
+                    <div class="stat-content">
+                        <div class="stat-label">剩余</div>
+                        <div class="stat-value" id="remainingPrimary">¥0</div>
+                        <div class="stat-secondary" id="remainingSecondary">$0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card wishlist-card">
+                    <div class="stat-icon">🛍️</div>
+                    <div class="stat-content">
+                        <div class="stat-label">愿望清单总额</div>
+                        <div class="stat-value" id="wishlistTotalPrimary">¥0</div>
+                        <div class="stat-secondary" id="wishlistTotalSecondary">$0</div>
+                    </div>
+                </div>
+                <div class="stat-card after-wishlist-card">
+                    <div class="stat-icon">💎</div>
+                    <div class="stat-content">
+                        <div class="stat-label">扣除愿望清单后</div>
+                        <div class="stat-value" id="afterWishlistPrimary">¥0</div>
+                        <div class="stat-secondary" id="afterWishlistSecondary">$0</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 支出页面 -->
+        <div class="page" id="expenses-page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>添加支出</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-grid-4">
+                        <input type="text" id="expenseName" placeholder="支出项目名称">
+                        <input type="number" id="expenseAmount" placeholder="金额">
+                        <select id="expenseCurrency">
+                            <option value="primary" id="expenseCurrencyPrimary">CNY</option>
+                            <option value="secondary" id="expenseCurrencySecondary">USD</option>
+                        </select>
+                        <button class="btn-primary" id="addExpense">+ 添加支出</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>支出记录</h2>
+                </div>
+                <div class="card-body">
+                    <div id="expensesList" class="list-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 储蓄页面 -->
+        <div class="page" id="savings-page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>添加储蓄目标</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-grid-5">
+                        <input type="text" id="savingsName" placeholder="储蓄目标名称">
+                        <input type="number" id="savingsTarget" placeholder="目标金额">
+                        <input type="number" id="savingsCurrent" placeholder="当前金额">
+                        <select id="savingsCurrency">
+                            <option value="primary" id="savingsCurrencyPrimary">CNY</option>
+                            <option value="secondary" id="savingsCurrencySecondary">USD</option>
+                        </select>
+                        <button class="btn-primary" id="addSavings">+ 添加目标</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>我的储蓄目标</h2>
+                </div>
+                <div class="card-body">
+                    <div id="savingsList" class="list-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 愿望清单页面 -->
+        <div class="page" id="wishlist-page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>添加愿望</h2>
+                </div>
+                <div class="card-body">
+                    <div class="wishlist-form-container">
+                        <div class="form-row">
+                            <input type="text" id="wishName" placeholder="想买的东西">
+                            <input type="number" id="wishPrice" placeholder="价格">
+                            <select id="wishCurrency">
+                                <option value="primary" id="wishCurrencyPrimary">CNY</option>
+                                <option value="secondary" id="wishCurrencySecondary">USD</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <select id="wishTaxOption">
+                                <option value="no">不需要打税</option>
+                                <option value="yes">需要打税</option>
+                            </select>
+                            <select id="wishTaxType" disabled>
+                                <option value="before">税前价</option>
+                                <option value="after">税后价</option>
+                            </select>
+                            <button class="btn-primary" id="addWish">+ 添加愿望</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>我的愿望清单</h2>
+                </div>
+                <div class="card-body">
+                    <div id="wishList" class="list-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设置页面 -->
+        <div class="page" id="settings-page">
+            <div class="card">
+                <div class="card-header">
+                    <h2>货币设置</h2>
+                </div>
+                <div class="card-body">
+                    <div class="settings-group">
+                        <label>主货币(结算货币)</label>
+                        <select id="primaryCurrency">
+                            <option value="CNY">🇨🇳 CNY (人民币)</option>
+                            <option value="USD">🇺🇸 USD (美元)</option>
+                            <option value="EUR">🇪🇺 EUR (欧元)</option>
+                            <option value="GBP">🇬🇧 GBP (英镑)</option>
+                            <option value="JPY">🇯🇵 JPY (日元)</option>
+                            <option value="HKD">🇭🇰 HKD (港币)</option>
+                            <option value="CAD">🇨🇦 CAD (加币)</option>
+                        </select>
+                    </div>
+                    <div class="settings-group">
+                        <label>次货币(消费货币)</label>
+                        <select id="secondaryCurrency">
+                            <option value="USD">🇺🇸 USD (美元)</option>
+                            <option value="CNY">🇨🇳 CNY (人民币)</option>
+                            <option value="EUR">🇪🇺 EUR (欧元)</option>
+                            <option value="GBP">🇬🇧 GBP (英镑)</option>
+                            <option value="JPY">🇯🇵 JPY (日元)</option>
+                            <option value="HKD">🇭🇰 HKD (港币)</option>
+                            <option value="CAD">🇨🇦 CAD (加币)</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" id="updateRate">🔄 手动更新汇率</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>设置月度预算</h2>
+                </div>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="number" id="monthlyBudget" placeholder="输入月度预算金额">
+                        <button class="btn-primary" id="setBudget">设置预算</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2>税率设置</h2>
+                </div>
+                <div class="card-body">
+                    <div class="settings-group">
+                        <label>默认税率 (%)</label>
+                        <input type="number" id="taxRate" placeholder="默认税率%" min="0" max="100" step="0.01">
+                    </div>
+                    <button class="btn-primary" id="saveTaxRate">保存税率</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
