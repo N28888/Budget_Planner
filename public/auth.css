@@ -389,17 +389,13 @@ body::after {
 }
 
 @media (max-width: 480px) {
-    body {
-        padding: 12px;
-    }
-    
     .auth-container {
         max-width: 100%;
-        padding: 0;
+        padding: 0 16px;
     }
     
     .auth-card {
-        padding: 28px 18px;
+        padding: 32px 20px;
         border-radius: 16px;
     }
 
