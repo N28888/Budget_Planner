@@ -1,4 +1,4 @@
-const CACHE_NAME = 'budget-tracker-v3';
+const CACHE_NAME = 'budget-tracker-v5';
 
 // 安装 Service Worker
 self.addEventListener('install', event => {

@@ -529,15 +529,21 @@ function updateAllDisplays() {
 
 // 删除函数
 function deleteExpense(index) {
-    data.expenses.splice(index, 1);
-    saveData();
-    updateAllDisplays();
+    const expense = data.expenses[index];
+    if (confirm(`确定要删除支出"${expense.name}"吗？\n金额: ${formatAmount(expense.amount, data.primaryCurrency)}`)) {
+        data.expenses.splice(index, 1);
+        saveData();
+        updateAllDisplays();
+    }
 }
 
 function deleteWish(index) {
-    data.wishlist.splice(index, 1);
-    saveData();
-    updateWishlist();
+    const wish = data.wishlist[index];
+    if (confirm(`确定要删除愿望"${wish.name}"吗？\n价格: ${formatAmount(wish.price, data.primaryCurrency)}`)) {
+        data.wishlist.splice(index, 1);
+        saveData();
+        updateWishlist();
+    }
 }
 
 // 页面切换

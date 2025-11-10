@@ -32,7 +32,16 @@ fi
 
 echo ""
 
-# 1. 打包项目
+# 1. 更新Service Worker版本
+echo "📝 更新Service Worker版本..."
+CURRENT_VERSION=$(grep "CACHE_NAME = 'budget-tracker-v" public/service-worker.js | grep -o 'v[0-9]*' | grep -o '[0-9]*')
+NEW_VERSION=$((CURRENT_VERSION + 1))
+sed -i.bak "s/budget-tracker-v${CURRENT_VERSION}/budget-tracker-v${NEW_VERSION}/g" public/service-worker.js
+rm -f public/service-worker.js.bak
+echo "✅ Service Worker版本: v${CURRENT_VERSION} -> v${NEW_VERSION}"
+echo ""
+
+# 2. 打包项目
 echo "📦 打包项目..."
 tar -czf budget-tracker.tar.gz \
     --exclude='node_modules' \
@@ -42,11 +51,11 @@ tar -czf budget-tracker.tar.gz \
     --exclude='.DS_Store' \
     .
 
-# 2. 上传到服务器
+# 3. 上传到服务器
 echo "📤 上传到服务器..."
 scp budget-tracker.tar.gz $USER@$SERVER:/tmp/
 
-# 3. 在服务器上执行部署
+# 4. 在服务器上执行部署
 echo "🚀 在服务器上部署..."
 ssh $USER@$SERVER bash -s << ENDSSH
     # 创建目录
@@ -94,17 +103,20 @@ ssh $USER@$SERVER bash -s << ENDSSH
     echo "✅ 部署完成！"
 ENDSSH
 
-# 4. 清理本地临时文件
+# 5. 清理本地临时文件
 rm budget-tracker.tar.gz
 
 echo "======================================"
 echo "✅ 部署完成！"
 echo "======================================"
-echo "访问地址: http://$SERVER:3000"
+echo "访问地址: https://budget.yfanj.ca"
+echo ""
+echo "⚠️  重要提示："
+echo "  新功能已部署，请清除浏览器缓存:"
+echo "  - 按 Ctrl+Shift+R (Mac: Cmd+Shift+R)"
+echo "  - 或在开发者工具中清除Service Worker"
 echo ""
 echo "常用命令:"
 echo "  查看日志: ssh $USER@$SERVER 'pm2 logs budget-tracker'"
 echo "  重启服务: ssh $USER@$SERVER 'pm2 restart budget-tracker'"
 echo "  查看状态: ssh $USER@$SERVER 'pm2 status'"
-echo ""
-echo "💡 提示: 下次部署时可以直接运行 ./deploy-to-server.sh"
