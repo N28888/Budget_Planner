@@ -90,6 +90,7 @@ The script will automatically:
 - 🇯🇵 JPY (Japanese Yen)
 - 🇭🇰 HKD (Hong Kong Dollar)
 - 🇨🇦 CAD (Canadian Dollar)
+  You are more than welcome to create [Issues](https://github.com/N28888/Budget_Planner/issues) if you need more currency.
 
 ## ⚙️ Environment Variables
 
